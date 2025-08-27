@@ -10,7 +10,7 @@ Permite administrar clientes, vehículos y espacios de estacionamiento de forma 
    ```bash
    git clone https://github.com/GilgameshGNU/proyecto-parqueo.git
 
-#### 5️⃣ Estado del proyecto 
+#### Estado del proyecto 
 ```markdown
 ## Estado del proyecto
 🚧 En desarrollo 🚧
