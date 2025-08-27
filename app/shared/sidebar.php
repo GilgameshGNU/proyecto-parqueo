@@ -1,1 +1,1 @@
-//menu lateral para el sistema XD//
+//menu lateral para el sistema//
