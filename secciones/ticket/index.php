@@ -1,3 +1,7 @@
+<?php
+require_once "detalle.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,13 +19,16 @@
 
     <div class="ticket-box">
       <h2>Información del Ticket</h2>
-      <p><strong>Nombre del cliente:</strong> </p>
-      <p><strong>CI:</strong> </p>
-      <p><strong>Vehículo:</strong> </p>
-      <p><strong>Placa:</strong></p>
-      <p><strong>Espacio asignado:</strong></p>
-      <p><strong>Fecha de entrada:</strong> </p>
-      <p><strong>Monto a pagar:</strong></p>
+      <p><strong>Nombre del cliente:</strong> <?php echo htmlspecialchars($cliente['NombreCompleto']); ?></p>
+      <p><strong>CI:</strong> <?php echo htmlspecialchars($cliente['Ci']); ?></p>
+      <p><strong>Vehículo:</strong> <?php echo htmlspecialchars($vehiculo['Tipo']); ?> (<?php echo htmlspecialchars($vehiculo['Marca']); ?> <?php echo htmlspecialchars($vehiculo['Modelo']); ?>)</p>
+      <p><strong>Placa:</strong> <?php echo htmlspecialchars($vehiculo['Placa']); ?></p>
+      <p><strong>Espacio asignado:</strong> <?php echo htmlspecialchars($numeroEspacio); ?></p>
+      <p><strong>Fecha de entrada:</strong> <?php echo date('d/m/Y H:i'); ?></p>
+      <p><strong>Monto a pagar:</strong> <?php echo number_format($monto_final, 2); ?> Bs</p>
+      <?php if ($descuento > 0): ?>
+        <p><strong>Descuento aplicado:</strong> <?php echo number_format($descuento, 2); ?>% (Membresía)</p>
+      <?php endif; ?>
     </div>
 
     <a href="crear.php" target="_blank">
