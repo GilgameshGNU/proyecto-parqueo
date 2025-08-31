@@ -1,0 +1,136 @@
+body {
+     margin: 0;
+     font-family: Arial, sans-serif;
+     background-color: #7CA2CE;
+     /* Fondo azul */
+     position: relative; /* Permite posicionar elementos absolutos dentro del body */
+ }
+
+ .container {
+     width: 100%;
+     max-width: 500px;
+     padding: 0 20px;
+     margin: 40px auto;
+     text-align: center;
+     position: relative; /* <-- Agrega esto */
+     background: transparent;
+     border-radius: 10px;
+ }
+
+ .logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  height: 90px;      /* Ajusta el tamaño aquí */
+  max-width: 180px;  /* Máximo ancho */
+  object-fit: contain;
+}
+
+ .back {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+ h1 {
+     text-align: center;
+     margin: 10px 0 20px;
+     font-size: 24px;
+ }
+
+ .plantas {
+     display: flex;
+     justify-content: center;
+     gap: 48px; /* Espacio entre las dos plantas */
+ }
+
+ .planta {
+     background: #f0f0f0;
+     padding: 24px 32px; /* Más espacio interno */
+     border-radius: 10px;
+     box-sizing: border-box;
+     min-width: 700px;   /* Más ancho para que entren los cuadros */
+ }
+
+ .planta:not(:last-child) {
+  border-right: 3px solid #b3d3e6; /* Línea vertical entre plantas */
+}
+
+ .titulo {
+     font-weight: bold;
+     margin-bottom: 10px;
+     font-size: 20px;
+ }
+
+ #planta-alta.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* 8 columnas para planta alta */
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+ #planta-baja.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 columnas para planta baja */
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+  border-radius: 10px;
+ }
+
+ .espacio {
+  width: 45px;
+  height: 45px;
+  background-color: #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 45px;
+  margin: 0; /* Elimina margen extra */
+}
+
+.espacio.ocupado {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+ .ocupado {
+     background-color: red !important;
+ }
+
+ .btn {
+     display: block;
+     width: 100%;
+     background-color: #0099ff;
+     color: white;
+     font-size: 16px;
+     padding: 12px;
+     text-align: center;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     margin-top: 25px;
+ }
+
+ .btn:hover {
+     background-color: #007acc;
+}
+
+a {
+    text-decoration: none; /* Quita la línea subrayada de todos los enlaces */
+}
+
+/* Si solo quieres quitarlo del botón específico */
+a .btn {
+    text-decoration: none;
+}
