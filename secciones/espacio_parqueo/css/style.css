@@ -96,12 +96,20 @@ body {
   font-size: 1rem;
   text-align: center;
   line-height: 45px;
-  margin: 0; /* Elimina margen extra */
+  margin: 0;
+  transition: background 0.2s;
 }
 
 .espacio.ocupado {
   background-color: #e74c3c;
   color: #fff;
+  cursor: not-allowed;
+}
+
+.espacio.seleccionado {
+  background-color: #2196f3;
+  color: #fff;
+  border: 2px solid #1769aa;
 }
 
  .ocupado {

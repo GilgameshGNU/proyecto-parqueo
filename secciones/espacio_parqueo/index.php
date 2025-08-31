@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de control</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
   <div class="back">
     <a href="../vehiculo/index.php" style="text-decoration:none; color:inherit;">Back</a>
@@ -26,11 +24,8 @@
       </div>
     </div>
 
-    <a href="../ticket/index.php">
-      <button class="btn">Asignar Espacio</button>
-    </a>
+    <button class="btn" id="btnAsignarEspacio">Asignar Espacio</button>
   </div>
   <script src="js/script.js"></script>
 </body>
-
 </html>
