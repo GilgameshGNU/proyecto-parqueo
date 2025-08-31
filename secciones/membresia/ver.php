@@ -27,7 +27,7 @@ if (empty($bancos)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Membresía - Sistema de Parqueo</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -85,22 +85,6 @@ if (empty($bancos)) {
         </div>
     </div>
 
-    <script>
-        // Función para mostrar información del banco al hacer clic
-        document.querySelectorAll('.bank-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const bankName = this.querySelector('.bank-name').textContent;
-                const percentage = this.querySelector('.percentage-display').textContent;
-                
-                // Mostrar información en una alerta o modal
-                console.log(`${bankName}: ${percentage}`);
-            });
-        });
-
-        // Agregar efecto hover a los elementos del banco
-        document.querySelectorAll('.bank-item').forEach(item => {
-            item.style.cursor = 'pointer';
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

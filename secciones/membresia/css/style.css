@@ -1,0 +1,267 @@
+body {
+   margin: 0;
+   font-family: Arial, sans-serif;
+   background-color: #7CA2CE;
+   /* Fondo azul */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   padding: 20px 0;
+ }
+
+ .container {
+   width: 100%;
+   max-width: 1000px;
+   padding: 70px;
+   margin: 30px auto;
+   /* Empuja hacia abajo como en la imagen */
+ }
+
+ .back {
+   font-size: 16px;
+   margin-bottom: 10px;
+   display: inline-block;
+   cursor: pointer;
+   color: #333;
+   text-decoration: none;
+ }
+
+ .back:hover {
+   color: #0099ff;
+ }
+
+ h1 {
+   text-align: center;
+   margin: 10px 0 20px;
+   font-size: 35px;
+   color: #333;
+ }
+
+ h2 {
+   text-align: center;
+   margin: 10px 0 20px;
+   font-size: 28px;
+   color: #333;
+ }
+
+ label {
+   display: block;
+   margin: 10px 0 5px;
+   font-size: 16px;
+   font-weight: bold;
+   color: #333;
+ }
+
+ input {
+   width: 100%;
+   padding: 10px;
+   border: none;
+   border-radius: 4px;
+   font-size: 16px;
+   margin-bottom: 10px;
+   box-sizing: border-box;
+ }
+
+ input:focus {
+   outline: none;
+   box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+ }
+
+ .btn {
+   display: block;
+   width: 100%;
+   background-color: #0099ff;
+   color: white;
+   font-size: 16px;
+   padding: 12px;
+   text-align: center;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   margin-top: 15px;
+   text-decoration: none;
+   box-sizing: border-box;
+ }
+
+ .btn:hover {
+   background-color: #007acc;
+   transform: translateY(-2px);
+   transition: all 0.3s ease;
+ }
+
+ /* Estilos específicos para membresía */
+ .bank-list {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   margin-bottom: 30px;
+ }
+
+ .bank-item {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   padding: 20px;
+   background: rgba(255, 255, 255, 0.9);
+   border-radius: 10px;
+   border: 2px solid #e0e0e0;
+   transition: all 0.3s ease;
+ }
+
+ .bank-item:hover {
+   border-color: #0099ff;
+   box-shadow: 0 5px 15px rgba(0, 153, 255, 0.2);
+   transform: translateY(-2px);
+ }
+
+ .bank-name {
+   font-size: 18px;
+   font-weight: 600;
+   color: #333;
+   min-width: 200px;
+ }
+
+ .percentage-input {
+   background: #f5f5f5;
+   border: 2px solid #ddd;
+   border-radius: 8px;
+   padding: 12px 15px;
+   font-size: 16px;
+   text-align: center;
+   width: 120px;
+   transition: all 0.3s ease;
+ }
+
+ .percentage-input:focus {
+   outline: none;
+   border-color: #0099ff;
+   background: white;
+   box-shadow: 0 0 8px rgba(0, 153, 255, 0.3);
+ }
+
+ .percentage-display {
+   background: #f5f5f5;
+   border: 2px solid #ddd;
+   border-radius: 8px;
+   padding: 12px 15px;
+   font-size: 16px;
+   text-align: center;
+   width: 120px;
+   color: #333;
+   font-weight: 600;
+ }
+
+ .action-buttons {
+   display: flex;
+   gap: 10px;
+   margin-left: auto;
+ }
+
+ .btn-edit, .btn-view, .btn-delete {
+   border: none;
+   border-radius: 8px;
+   padding: 12px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-width: 45px;
+   height: 45px;
+   font-size: 14px;
+ }
+
+ .btn-edit {
+   background: #28a745;
+   color: white;
+ }
+
+ .btn-edit:hover {
+   background: #218838;
+   transform: scale(1.1);
+ }
+
+ .btn-view {
+   background: #ffc107;
+   color: #212529;
+ }
+
+ .btn-view:hover {
+   background: #e0a800;
+   transform: scale(1.1);
+ }
+
+ .btn-delete {
+   background: #dc3545;
+   color: white;
+ }
+
+ .btn-delete:hover {
+   background: #c82333;
+   transform: scale(1.1);
+ }
+
+ .btn-edit-large {
+   background: #6c757d;
+   color: white;
+   padding: 12px 20px;
+   border-radius: 8px;
+   font-size: 16px;
+   font-weight: 500;
+   min-width: auto;
+   height: auto;
+   text-decoration: none;
+ }
+
+ .btn-edit-large:hover {
+   background: #5a6268;
+   transform: translateY(-2px);
+ }
+
+ /* Estilo para mensajes de error */
+ .error-message {
+   color: red;
+   background: #ffebee;
+   padding: 10px;
+   border-radius: 4px;
+   margin-bottom: 20px;
+   border: 1px solid #ffcdd2;
+ }
+
+ /* Estilo para mensajes de éxito */
+ .success-message {
+   color: #155724;
+   background: #d4edda;
+   padding: 10px;
+   border-radius: 4px;
+   margin-bottom: 20px;
+   border: 1px solid #c3e6cb;
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+   .container {
+     padding: 20px;
+     margin: 10px auto;
+   }
+   
+   .bank-item {
+     flex-direction: column;
+     text-align: center;
+     gap: 15px;
+   }
+   
+   .action-buttons {
+     margin-left: 0;
+     justify-content: center;
+   }
+   
+   h1 {
+     font-size: 28px;
+   }
+   
+   h2 {
+     font-size: 24px;
+   }
+ }

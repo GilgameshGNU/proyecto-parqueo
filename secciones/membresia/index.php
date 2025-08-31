@@ -7,7 +7,7 @@ include_once '../../db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membresía - Sistema de Parqueo</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -112,6 +112,21 @@ include_once '../../db.php';
                     </div>
                 </div>
 
+                <!-- Indicador de total -->
+                <div id="total-display" style="
+                    text-align: center;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: #6c757d;
+                    margin: 20px 0;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border-radius: 10px;
+                    border: 2px solid #e9ecef;
+                ">
+                    Total: 93%
+                </div>
+
                 <!-- Botón guardar -->
                 <button type="submit" class="main-button">
                     <i class="fas fa-save"></i>
@@ -121,64 +136,6 @@ include_once '../../db.php';
         </div>
     </div>
 
-    <script>
-        // Funciones para los botones de acción
-        function editBank(bankId) {
-            const input = document.querySelector(`input[name="${bankId}"]`);
-            input.focus();
-            input.select();
-        }
-
-        function viewBank(bankId) {
-            const input = document.querySelector(`input[name="${bankId}"]`);
-            alert(`Valor actual de ${bankId}: ${input.value}%`);
-        }
-
-        function deleteBank(bankId) {
-            if (confirm('¿Estás seguro de que quieres eliminar este banco?')) {
-                const input = document.querySelector(`input[name="${bankId}"]`);
-                input.value = '0';
-            }
-        }
-
-        // Validación del formulario
-        document.getElementById('membershipForm').addEventListener('submit', function(e) {
-            const inputs = document.querySelectorAll('.percentage-input');
-            let total = 0;
-            
-            inputs.forEach(input => {
-                total += parseInt(input.value) || 0;
-            });
-            
-            if (total > 100) {
-                e.preventDefault();
-                alert('El total de porcentajes no puede exceder el 100%');
-                return false;
-            }
-            
-            if (total < 0) {
-                e.preventDefault();
-                alert('Los porcentajes no pueden ser negativos');
-                return false;
-            }
-        });
-
-        // Actualizar total en tiempo real
-        document.querySelectorAll('.percentage-input').forEach(input => {
-            input.addEventListener('input', updateTotal);
-        });
-
-        function updateTotal() {
-            const inputs = document.querySelectorAll('.percentage-input');
-            let total = 0;
-            
-            inputs.forEach(input => {
-                total += parseInt(input.value) || 0;
-            });
-            
-            // Mostrar el total en algún lugar si es necesario
-            console.log('Total de porcentajes:', total + '%');
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
