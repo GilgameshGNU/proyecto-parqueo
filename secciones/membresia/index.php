@@ -14,7 +14,7 @@ include_once '../../db.php';
     <!-- Header - Posicionado como en la imagen -->
     <header class="header">
         <div>
-            <span style="font-size: 1.2rem; font-weight: 600; color: #333;">Cliente</span>
+            <span style="font-size: 1.2rem; font-weight: 600; color: #333;">Membresía</span>
         </div>
         <a href="../../index.php" class="back">
             <i class="fas fa-arrow-left"></i>

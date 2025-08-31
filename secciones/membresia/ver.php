@@ -35,11 +35,11 @@ if (empty($bancos)) {
     <header class="header">
         <div class="nav-container">
             <div>
-                <span style="font-size: 1.2rem; font-weight: 600; color: #495057;">Cliente</span>
+                <span style="font-size: 1.2rem; font-weight: 600; color: #495057;">Membresía</span>
             </div>
             <a href="../../index.php" class="back-button">
                 <i class="fas fa-arrow-left"></i>
-                Volver
+                Back
             </a>
         </div>
     </header>

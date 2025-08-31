@@ -2,7 +2,7 @@ body {
    margin: 0;
    font-family: Arial, sans-serif;
    background-color: #7CA2CE;
-   /* Fondo azul exacto como en la imagen */
+   /* Fondo azul*/
    display: flex;
    justify-content: center;
    align-items: center;
@@ -33,7 +33,6 @@ body {
 .container {
    width: 100%;
    max-width: 800px;
-   padding: 70px;
    margin: 30px auto;
    text-align: center;
 }
@@ -41,7 +40,7 @@ body {
 /* Logo y título */
 .logo-section {
    text-align: center;
-   margin: 2rem 0;
+   
 }
 
 .logo {
@@ -75,8 +74,10 @@ body {
    font-weight: 600;
 }
 
-/* Estilos específicos para membresía - IDÉNTICOS a la imagen */
+/* Estilos específicos para membresía -*/
 .bank-list {
+   width: 800px;
+
    display: flex;
    flex-direction: column;
    gap: 20px;
@@ -183,7 +184,7 @@ body {
    transform: scale(1.05);
 }
 
-/* Botón guardar - IDÉNTICO a la imagen */
+/* Botón guardar */
 .main-button {
    background: #0099ff;
    color: white;
@@ -195,7 +196,7 @@ body {
    cursor: pointer;
    transition: all 0.3s ease;
    width: 100%;
-   max-width: 400px;
+   max-width: 800px;
    margin: 0 auto;
    display: block;
 }
