@@ -31,33 +31,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Selección de vehículo
   vehiculos.forEach((v) => {
     v.addEventListener("click", () => {
-      // Quitar selección anterior
       vehiculos.forEach((el) => el.classList.remove("seleccionado"));
 
-      // Marcar nuevo seleccionado
       v.classList.add("seleccionado");
       seleccionado = v;
       infoSalida.style.display = "block";
 
-      // Obtener datos del vehículo
       const horaEntrada = new Date(v.dataset.horaentrada);
       const salida = new Date();
 
-      // Fecha completa para enviar
       fechaHoraSalida = salida.toISOString().slice(0, 16).replace("T", ":");
 
-      // Solo hora para mostrar
       const horaFormateada = salida.toTimeString().slice(0, 5);
 
       const descuento = parseFloat(v.dataset.descuento) || 0;
 
-      // Calcular tiempo estacionado
       const diffMs = salida - horaEntrada;
       const diffMins = Math.floor(diffMs / 60000);
       const horas = Math.floor(diffMins / 60);
       const minutos = diffMins % 60;
 
-      // Calcular costo (basado en el tipo de vehículo y tarifas)
       let tarifaPorHora = v.dataset.tarifa;
       let costo = (horas + (minutos > 0 ? 1 : 0)) * tarifaPorHora;
 
@@ -65,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         costo = costo * (1 - descuento / 100);
       }
 
-      // Mostrar solo hora al usuario
       document.getElementById("horaSalida").value = horaFormateada;
       document.getElementById("descuento").value =
         descuento > 0 ? `${descuento}%` : "No aplica";
@@ -74,24 +66,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.getElementById("Back").addEventListener("click",() => {
+  document.getElementById("Back").addEventListener("click", () => {
     window.location.href = `../../../index.php`;
-  })
-  // Confirmar salida
+  });
+
+  // Confirmar salida con POST
   document.getElementById("confirmarBtn").addEventListener("click", () => {
     if (!seleccionado) {
       alert("Selecciona un vehículo primero");
       return;
     }
 
-    // Antes de enviar/redirigir, poner el valor completo en el input
     document.getElementById("horaSalida").value = fechaHoraSalida;
 
     const idTicket = seleccionado.dataset.idticket;
     const costo = document.getElementById("costoTotal").value.replace("$", "");
     const horaSalida = document.getElementById("horaSalida").value;
 
-    window.location.href =
-      `../../pago/index.php?id_ticket=${idTicket}&costo=${costo}&horasalida=${horaSalida}`;
+    // Crear formulario dinámico para enviar por POST
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "../pago/index.php";
+
+    const inputId = document.createElement("input");
+    inputId.type = "hidden";
+    inputId.name = "id_ticket";
+    inputId.value = idTicket;
+    form.appendChild(inputId);
+
+    const inputCosto = document.createElement("input");
+    inputCosto.type = "hidden";
+    inputCosto.name = "costo";
+    inputCosto.value = costo;
+    form.appendChild(inputCosto);
+
+    const inputHora = document.createElement("input");
+    inputHora.type = "hidden";
+    inputHora.name = "horasalida";
+    inputHora.value = horaSalida;
+    form.appendChild(inputHora);
+
+    document.body.appendChild(form);
+    form.submit();
   });
 });
