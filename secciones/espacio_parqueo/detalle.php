@@ -1,5 +1,5 @@
 <?php
-require_once "../../db.php";
+include "../../db.php";
 
 $espacios = [];
 $query = mysqli_query($conectador, "SELECT * FROM EspacioParqueo ORDER BY Zona, NumeroEspacio ASC");

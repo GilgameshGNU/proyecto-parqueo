@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db.php";
+include "../../db.php";
 
 // Verificar que todos los datos necesarios existan
 if (!isset($_SESSION['cliente_temp']) || !isset($_SESSION['vehiculo_temp']) || !isset($_SESSION['id_espacio'])) {
@@ -11,7 +11,7 @@ if (!isset($_SESSION['cliente_temp']) || !isset($_SESSION['vehiculo_temp']) || !
 mysqli_begin_transaction($conectador);
 
 try {
-    // 1. Insertar cliente
+    // Insertar cliente
     $cliente = $_SESSION['cliente_temp'];
     $sql_cliente = "INSERT INTO Cliente (NombreCompleto, Telefono, Ci, IdMembresia) 
                    VALUES (?, ?, ?, ?)";
@@ -22,7 +22,7 @@ try {
     mysqli_stmt_execute($stmt);
     $idCliente = mysqli_insert_id($conectador);
 
-    // 2. Insertar vehículo
+    // Insertar vehículo
     $vehiculo = $_SESSION['vehiculo_temp'];
     $sql_vehiculo = "INSERT INTO Vehiculo (Placa, Modelo, Marca, Color, IdTipo) 
                     VALUES (?, ?, ?, ?, ?)";
@@ -32,21 +32,21 @@ try {
     mysqli_stmt_execute($stmt);
     $idVehiculo = mysqli_insert_id($conectador);
 
-    // 3. Relacionar cliente-vehículo
+    // Relaciona cliente-vehículo
     $sql_relacion = "INSERT INTO ClienteVehiculos (IdCliente, IdVehiculo) VALUES (?, ?)";
     $stmt = mysqli_prepare($conectador, $sql_relacion);
     mysqli_stmt_bind_param($stmt, "ii", $idCliente, $idVehiculo);
     mysqli_stmt_execute($stmt);
     $idClienteVehiculo = mysqli_insert_id($conectador);
 
-    // 4. Actualizar espacio a Mantenimiento (porque no existe Ocupado)
+    // Actualiza el espacio como ocupado
     $idEspacio = $_SESSION['id_espacio'];
     $sql_espacio = "UPDATE EspacioParqueo SET Estado = 'Mantenimiento' WHERE IdEspacioParqueo = ?";
     $stmt = mysqli_prepare($conectador, $sql_espacio);
     mysqli_stmt_bind_param($stmt, "i", $idEspacio);
     mysqli_stmt_execute($stmt);
 
-    // 5. Crear ticket
+    // Se crear ticket
     $sql_ticket = "INSERT INTO Ticket (IdClienteVeh, IdEspacioParqueo, FechaHoraEntrada, Estado) 
                   VALUES (?, ?, NOW(), 'Abierto')";
     $stmt = mysqli_prepare($conectador, $sql_ticket);
@@ -54,7 +54,7 @@ try {
     mysqli_stmt_execute($stmt);
     $idTicket = mysqli_insert_id($conectador);
 
-    // Confirmar transacción
+    // Se confirmar transacción
     mysqli_commit($conectador);
 
     // Guardar IDs en sesión para ticket

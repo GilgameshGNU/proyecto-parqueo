@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db.php";
+include "../../db.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $placa = trim($_POST['placa'] ?? '');

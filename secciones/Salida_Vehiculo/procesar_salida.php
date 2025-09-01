@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conectador->begin_transaction();
     
     try {
-        // 1. Obtener información del ticket y espacio
+        // Obtiene la información del ticket y espacio
         $sql_info = "SELECT t.IdTicket, t.IdEspacioParqueo, ep.NumeroEspacio, ep.Zona
                      FROM Ticket t
                      JOIN EspacioParqueo ep ON t.IdEspacioParqueo = ep.IdEspacioParqueo
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ticket_info = $result_info->fetch_assoc();
         $id_espacio = $ticket_info['IdEspacioParqueo'];
         
-        // 2. Actualizar ticket - cerrarlo y establecer hora de salida
+        // Actualiza el ticket - cerrarlo y establecer hora de salida
         $sql_ticket = "UPDATE Ticket 
                       SET FechaHoraSalida = ?, Estado = 'Cerrado' 
                       WHERE IdTicket = ?";
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_ticket->bind_param("si", $hora_salida, $id_ticket);
         $stmt_ticket->execute();
         
-        // 3. Liberar espacio de parqueo - CAMBIAR A DISPONIBLE
+        // Liberar espacio del parqueo - CAMBIAR A DISPONIBLE
         $sql_espacio = "UPDATE EspacioParqueo SET Estado = 'Disponible' WHERE IdEspacioParqueo = ?";
         $stmt_espacio = $conectador->prepare($sql_espacio);
         $stmt_espacio->bind_param("i", $id_espacio);
