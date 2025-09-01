@@ -4,7 +4,7 @@ include(__DIR__ . "/../../db.php");
 $id = $_GET['id'];
 
 // Obtener ticket
-$sql = "SELECT t.IdTicket, v.Placa, v.Modelo, v.Marca, v.Color, e.NumeroEspacio, e.Zona 
+$sql = "SELECT t.IdTicket, v.IdVehiculo, v.Placa, v.Modelo, v.Marca, v.Color, e.IdEspacioParqueo, e.NumeroEspacio, e.Zona 
         FROM Ticket t
         INNER JOIN ClienteVehiculos cv ON t.IdClienteVeh = cv.IdClienteVeh
         INNER JOIN Vehiculo v ON cv.IdVehiculo = v.IdVehiculo
@@ -13,16 +13,27 @@ $sql = "SELECT t.IdTicket, v.Placa, v.Modelo, v.Marca, v.Color, e.NumeroEspacio,
 $result = mysqli_query($conectador, $sql);
 $data = mysqli_fetch_assoc($result);
 
-// Procesar salida
+// Procesar guardado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sqlUpdate = "UPDATE Ticket 
-                  SET FechaHoraSalida = NOW(), Estado = 'Cerrado' 
-                  WHERE IdTicket = $id";
-    if (mysqli_query($conectador, $sqlUpdate)) {
-        echo "<script>alert('Vehículo salió correctamente'); window.location='index.php';</script>";
-    } else {
-        echo " Error: " . mysqli_error($conectador);
-    }
+    $placa = $_POST['placa'];
+    $modelo = $_POST['modelo'];
+    $marca  = $_POST['marca'];
+    $color  = $_POST['color'];
+    $numeroEspacio = $_POST['numero_espacio'];
+
+    // Actualizar Vehiculo
+    $sqlVehiculo = "UPDATE Vehiculo 
+                    SET Placa='$placa', Modelo='$modelo', Marca='$marca', Color='$color' 
+                    WHERE IdVehiculo = {$data['IdVehiculo']}";
+    mysqli_query($conectador, $sqlVehiculo);
+
+    // Actualizar EspacioParqueo
+    $sqlEspacio = "UPDATE EspacioParqueo 
+                   SET NumeroEspacio='$numeroEspacio' 
+                   WHERE IdEspacioParqueo = {$data['IdEspacioParqueo']}";
+    mysqli_query($conectador, $sqlEspacio);
+
+    echo "<script>alert('Datos guardados correctamente'); window.location='index.php';</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -34,15 +45,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container">
-        <h2>Salida de Vehículo</h2>
-        <p><b>Placa:</b> <?php echo $data['Placa']; ?></p>
-        <p><b>Modelo:</b> <?php echo $data['Modelo']; ?></p>
-        <p><b>Marca:</b> <?php echo $data['Marca']; ?></p>
-        <p><b>Color:</b> <?php echo $data['Color']; ?></p>
-        <p><b>Espacio:</b> <?php echo $data['NumeroEspacio']." (".$data['Zona'].")"; ?></p>
+        <h2>Editar Vehículo</h2>
 
         <form method="POST">
-            <button type="submit" class="btn-del">Confirmar Salida</button>
+            <label>Placa:</label>
+            <input type="text" name="placa" value="<?php echo $data['Placa']; ?>" required>
+
+            <p><label>Modelo:</label>
+            <input type="text" name="modelo" value="<?php echo $data['Modelo']; ?>" required></p>
+
+            <p><label>Marca:</label>
+            <input type="text" name="marca" value="<?php echo $data['Marca']; ?>" required></p>
+
+            <p><label>Color:</label>
+            <input type="text" name="color" value="<?php echo $data['Color']; ?>" required></p>
+
+            <p><label>Espacio:</label>
+            <input type="text" name="numero_espacio" value="<?php echo $data['NumeroEspacio']; ?>" required></p>
+
+            <button type="submit" class="btn-del">Guardar</button>
             <a href="menu.php" class="btn-ver">Cancelar</a>
         </form>
     </div>
