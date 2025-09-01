@@ -7,20 +7,18 @@
 }
 
 body {
-    background: #7CA2CE; /* Fondo azul que pediste */
+    background: #7CA2CE;
     color: #333;
     display: flex;
     justify-content: center;
     padding: 30px;
-    min-height: 100vh;
 }
 
-/* Contenedor principal */
 .container {
     background: #fff;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     width: 100%;
     max-width: 900px;
 }
@@ -28,7 +26,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #003566;
+    color: #0077b6;
 }
 
 /* Tabla de tarifas */
@@ -39,7 +37,7 @@ table {
 }
 
 table thead {
-    background: #003566;
+    background: #0077b6;
     color: white;
 }
 
@@ -49,9 +47,9 @@ table th, table td {
     border-bottom: 1px solid #ddd;
 }
 
-table tr:hover {
+/* table tr:hover {
     background: #f1f1f1;
-}
+} */
 
 .btn-edit {
     background: #ffb703;
@@ -60,7 +58,6 @@ table tr:hover {
     text-decoration: none;
     color: black;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .btn-edit:hover {
@@ -102,7 +99,6 @@ form input {
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
-    transition: 0.3s;
 }
 
 .btn-save:hover {
@@ -116,7 +112,6 @@ form input {
     text-decoration: none;
     color: #333;
     font-size: 15px;
-    transition: 0.3s;
 }
 
 .btn-back:hover {
