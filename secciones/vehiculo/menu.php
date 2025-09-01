@@ -57,7 +57,7 @@ $result = mysqli_query($conectador, $sql);
                         <td>
                             <a href="detalle.php?id=<?php echo $row['IdTicket']; ?>" class="btn-ver">👁️</a>
                             <a href="editar.php?id=<?php echo $row['IdTicket']; ?>" class="btn-edit">✏️</a>
-                            <a href="eliminar.php?id=<?php echo $row['IdTicket']; ?>" class="btn-del" onclick="return confirm('¿Seguro que deseas eliminar?')">🗑️</a>
+                           
                         </td>
                     </tr>
                 <?php } ?>

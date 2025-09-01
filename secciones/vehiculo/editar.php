@@ -60,9 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><label>Color:</label>
             <input type="text" name="color" value="<?php echo $data['Color']; ?>" required></p>
 
-            <p><label>Espacio:</label>
-            <input type="text" name="numero_espacio" value="<?php echo $data['NumeroEspacio']; ?>" required></p>
-
+        
             <button type="submit" class="btn-del">Guardar</button>
             <a href="menu.php" class="btn-ver">Cancelar</a>
         </form>
