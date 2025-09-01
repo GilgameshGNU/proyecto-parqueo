@@ -44,6 +44,7 @@ $cliente_temp = $_SESSION['cliente_temp'] ?? [];
     </form>
   </div>
   <script src="js/script.js"></script>
+  <script src="../js/auto-cleanup.js"></script>
 </body>
 
 </html>

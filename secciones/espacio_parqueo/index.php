@@ -27,5 +27,6 @@
     <button class="btn" id="btnAsignarEspacio">Asignar Espacio</button>
   </div>
   <script src="js/script.js"></script>
+  <script src="../js/auto-cleanup.js"></script>
 </body>
 </html>

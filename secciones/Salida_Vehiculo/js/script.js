@@ -51,18 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const horas = Math.floor(diffMins / 60);
       const minutos = diffMins % 60;
 
-      let tarifaPorHora = v.dataset.tarifa;
-      let costo = (horas + (minutos > 0 ? 1 : 0)) * tarifaPorHora;
-
-      if (descuento > 0) {
-        costo = costo * (1 - descuento / 100);
-      }
+      // Usar el costo total calculado en PHP
+      let costo = parseFloat(v.dataset.costoTotal) || 0;
 
       document.getElementById("horaSalida").value = horaFormateada;
+      document.getElementById("tarifaHora").value = `Bs ${v.dataset.tarifa}`;
       document.getElementById("descuento").value =
         descuento > 0 ? `${descuento}%` : "No aplica";
       document.getElementById("tiempoEstacionado").value = `${horas}h ${minutos}m`;
-      document.getElementById("costoTotal").value = `$${costo.toFixed(2)}`;
+      document.getElementById("costoTotal").value = `Bs ${costo.toFixed(2)}`;
     });
   });
 
@@ -70,18 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = `../../../index.php`;
   });
 
-  // Confirmar salida con POST
-  document.getElementById("confirmarBtn").addEventListener("click", () => {
+  // Botón para ir a pago después de confirmar salida
+  document.getElementById("irPagoBtn").addEventListener("click", () => {
     if (!seleccionado) {
-      alert("Selecciona un vehículo primero");
+      alert("No hay vehículo seleccionado");
       return;
     }
 
-    document.getElementById("horaSalida").value = fechaHoraSalida;
-
     const idTicket = seleccionado.dataset.idticket;
-    const costo = document.getElementById("costoTotal").value.replace("$", "");
-    const horaSalida = document.getElementById("horaSalida").value;
+    const costo = document.getElementById("costoTotal").value.replace("Bs ", "");
+    const horaSalida = fechaHoraSalida;
 
     // Crear formulario dinámico para enviar por POST
     const form = document.createElement("form");
@@ -109,4 +104,56 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(form);
     form.submit();
   });
+
+  // Confirmar salida con POST
+  document.getElementById("confirmarBtn").addEventListener("click", () => {
+    if (!seleccionado) {
+      alert("Selecciona un vehículo primero");
+      return;
+    }
+
+    const idTicket = seleccionado.dataset.idticket;
+    const horaSalida = fechaHoraSalida;
+
+    // Procesar la salida inmediatamente
+    procesarSalida(idTicket, horaSalida);
+  });
+
+  // Función para procesar la salida del vehículo
+  async function procesarSalida(idTicket, horaSalida) {
+    try {
+      const formData = new FormData();
+      formData.append('id_ticket', idTicket);
+      formData.append('horasalida', horaSalida);
+
+      const response = await fetch('procesar_salida.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Mostrar mensaje de éxito
+        alert(`Vehículo salió exitosamente. Espacio ${result.espacio} (${result.zona}) liberado.`);
+        
+        // Cambiar botón para ir a pago
+        document.getElementById('confirmarBtn').style.display = 'none';
+        document.getElementById('irPagoBtn').style.display = 'block';
+        
+        // Mostrar mensaje de éxito en la interfaz
+        const infoSalida = document.getElementById('infoSalida');
+        const mensajeExito = document.createElement('div');
+        mensajeExito.className = 'mensaje-exito';
+        mensajeExito.innerHTML = `<p style="color: green; font-weight: bold;">✓ ${result.message}</p>`;
+        infoSalida.appendChild(mensajeExito);
+        
+      } else {
+        alert('Error: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al procesar la salida del vehículo');
+    }
+  }
 });
