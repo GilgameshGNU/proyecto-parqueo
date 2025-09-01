@@ -1,0 +1,116 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fdf6f0; /* Beige muy suave */
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 40px auto;
+    background: #ffe5d9; /* Rosa pastel cálido */
+    padding: 30px;
+    border-radius: 15px;
+    color: #4a4a4a; /* Gris oscuro suave */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #e07a5f; /* Rosa suave más intenso para el título */
+}
+
+#buscador {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    width: 250px;
+    border: 1px solid #f0d9d5;
+    border-radius: 10px;
+    background: #fff6f2; /* Muy suave y armonioso */
+    color: #4a4a4a;
+    transition: 0.3s;
+}
+
+#buscador:focus {
+    border-color: #e07a5f;
+    outline: none;
+    box-shadow: 0 0 8px rgba(224,122,95,0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+table th {
+    background: #f7cac9; /* Rosa pastel */
+    color: #4a4a4a;
+    padding: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.btn-ver {
+    background: #a8dadc; /* Verde azulado pastel */
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #1d3557;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-ver:hover {
+    background: #7ed6df;
+}
+
+.btn-edit {
+    background: #ffd6a5; /* Amarillo pastel */
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #4a4a4a;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-edit:hover {
+    background: #ffbc73;
+}
+
+.btn-del {
+    background: #ffadad; /* Rosa pastel suave */
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #4a4a4a;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-del:hover {
+    background: #ff7f7f;
+}
+.btn-volver {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 6px 12px;
+    background-color: #ff7f7f;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-volver:hover {
+    background-color: #ff7f7f;
+}
