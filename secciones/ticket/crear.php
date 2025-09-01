@@ -85,7 +85,7 @@ $html = "
     <div class='ticket'>
         <div class='header'>
             <img src='data:image/png;base64,{$logoData}' class='logo'>
-            <h2>Parqueo UEB</h2>
+            <h2>CAR PARKING </h2>
             <h3>Ticket de Estacionamiento</h3>
         </div>
         <div class='info'>
@@ -98,7 +98,7 @@ $html = "
             <p><strong>Monto:</strong> {$data['monto']} Bs</p>
         </div>
         <div class='footer'>
-            <p>¡Gracias por su preferencia!</p>
+            <p>Gracias por su preferencia</p>
             <p>Conserve este ticket para su salida</p>
         </div>
     </div>
@@ -110,7 +110,7 @@ $dompdf = new Dompdf([
     'isRemoteEnabled' => true
 ]);
 $dompdf->loadHtml($html);
-$dompdf->setPaper([0, 0, 226.77, 425.20]); // Tamaño más compacto
+$dompdf->setPaper([0, 0, 226.77, 700]); // Tamaño más compacto
 $dompdf->render();
 $dompdf->stream("ticket_parqueo.pdf", ["Attachment" => true]);
 
