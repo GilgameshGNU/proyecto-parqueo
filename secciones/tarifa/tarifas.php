@@ -22,8 +22,6 @@ $result = mysqli_query($conectador, $query);
                     <th>ID</th>
                     <th>Tipo Vehículo</th>
                     <th>Precio (Bs.)</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
                     <th>Acción</th>
                 </tr>
             </thead>
@@ -33,8 +31,7 @@ $result = mysqli_query($conectador, $query);
                     <td><?= $row['IdTarifa'] ?></td>
                     <td><?= $row['TipoVehiculo'] ?></td>
                     <td><?= number_format($row['Precio'], 2) ?></td>
-                    <td><?= $row['FechaInicio'] ?></td>
-                    <td><?= $row['FechaFin'] ?? '-' ?></td>
+
                     <td><a href="editar_tarifa.php?id=<?= $row['IdTarifa'] ?>" class="btn-edit">Editar</a></td>
                 </tr>
                 <?php } ?>
