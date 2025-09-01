@@ -1,232 +1,324 @@
-// Funcionalidades específicas para la sección de membresía
+// Variables globales
+let bancoEditando = null;
 
-// Funciones para los botones de acción
-function editBank(bankId) {
-    const input = document.querySelector(`input[name="${bankId}"]`);
-    if (input) {
-        input.focus();
-        input.select();
-        // Agregar efecto visual
-        input.style.borderColor = '#0099ff';
-        input.style.boxShadow = '0 0 8px rgba(0, 153, 255, 0.5)';
-        
-        // Remover efecto después de 2 segundos
+// Función para mostrar notificaciones
+function mostrarNotificacion(mensaje, tipo = 'info') {
+    // Crear elemento de notificación
+    const notificacion = document.createElement('div');
+    notificacion.className = `notificacion ${tipo}`;
+    notificacion.innerHTML = `
+        <div class="notificacion-contenido">
+            <i class="fas ${tipo === 'success' ? 'fa-check-circle' : tipo === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${mensaje}</span>
+        </div>
+    `;
+    
+    // Agregar estilos
+    notificacion.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${tipo === 'success' ? '#d4edda' : tipo === 'error' ? '#f8d7da' : '#d1ecf1'};
+        color: ${tipo === 'success' ? '#155724' : tipo === 'error' ? '#721c24' : '#0c5460'};
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border: 1px solid ${tipo === 'success' ? '#c3e6cb' : tipo === 'error' ? '#f5c6cb' : '#bee5eb'};
+    `;
+    
+    document.body.appendChild(notificacion);
+    
+    // Animar entrada
+    setTimeout(() => {
+        notificacion.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remover después de 4 segundos
+    setTimeout(() => {
+        notificacion.style.transform = 'translateX(100%)';
         setTimeout(() => {
-            input.style.borderColor = '';
-            input.style.boxShadow = '';
-        }, 2000);
-    }
+            document.body.removeChild(notificacion);
+        }, 300);
+    }, 4000);
 }
 
-function viewBank(bankId) {
-    const input = document.querySelector(`input[name="${bankId}"]`);
-    if (input) {
-        const value = input.value;
-        showNotification(`Valor actual de ${bankId}: ${value}%`, 'info');
-    }
-}
-
-function deleteBank(bankId) {
-    if (confirm('¿Estás seguro de que quieres eliminar este banco?')) {
-        const input = document.querySelector(`input[name="${bankId}"]`);
-        if (input) {
-            input.value = '0';
-            showNotification(`Banco ${bankId} eliminado`, 'success');
-        }
-    }
-}
-
-// Validación del formulario
-document.addEventListener('DOMContentLoaded', function() {
-    const membershipForm = document.getElementById('membershipForm');
-    if (membershipForm) {
-        membershipForm.addEventListener('submit', function(e) {
-            const inputs = document.querySelectorAll('.percentage-input');
-            let total = 0;
-            
-            inputs.forEach(input => {
-                total += parseInt(input.value) || 0;
-            });
-            
-            if (total > 100) {
-                e.preventDefault();
-                showNotification('El total de porcentajes no puede exceder el 100%', 'error');
-                return false;
-            }
-            
-            if (total < 0) {
-                e.preventDefault();
-                showNotification('Los porcentajes no pueden ser negativos', 'error');
-                return false;
-            }
-            
-            showNotification('Formulario enviado correctamente', 'success');
-        });
-    }
-
-    // Actualizar total en tiempo real
-    const inputs = document.querySelectorAll('.percentage-input');
-    inputs.forEach(input => {
-        input.addEventListener('input', updateTotal);
-        input.addEventListener('change', validateInput);
-    });
-
-    // Mostrar total inicial
-    updateTotal();
-});
-
-// Función para actualizar el total
-function updateTotal() {
+// Función para actualizar el total de porcentajes
+function actualizarTotal() {
     const inputs = document.querySelectorAll('.percentage-input');
     let total = 0;
     
     inputs.forEach(input => {
-        total += parseInt(input.value) || 0;
+        const valor = parseFloat(input.value) || 0;
+        total += valor;
     });
     
-    // Mostrar el total en algún lugar si es necesario
     const totalDisplay = document.getElementById('total-display');
     if (totalDisplay) {
-        totalDisplay.textContent = `Total: ${total}%`;
+        totalDisplay.textContent = `Total: ${total.toFixed(2)}%`;
         
         // Cambiar color según el total
         if (total > 100) {
             totalDisplay.style.color = '#dc3545';
+            totalDisplay.style.background = '#f8d7da';
+            totalDisplay.style.borderColor = '#f5c6cb';
         } else if (total === 100) {
-            totalDisplay.style.color = '#28a745';
+            totalDisplay.style.color = '#155724';
+            totalDisplay.style.background = '#d4edda';
+            totalDisplay.style.borderColor = '#c3e6cb';
         } else {
             totalDisplay.style.color = '#6c757d';
+            totalDisplay.style.background = '#f8f9fa';
+            totalDisplay.style.borderColor = '#e9ecef';
         }
     }
 }
 
-// Función para validar entrada individual
-function validateInput() {
-    const value = parseInt(this.value) || 0;
-    
-    if (value < 0) {
-        this.value = 0;
-        showNotification('El porcentaje no puede ser negativo', 'error');
-    } else if (value > 100) {
-        this.value = 100;
-        showNotification('El porcentaje no puede exceder 100%', 'error');
-    }
-    
-    updateTotal();
-}
-
-// Función para mostrar notificaciones
-function showNotification(message, type = 'info') {
-    // Crear elemento de notificación
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    // Estilos de la notificación
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-        max-width: 300px;
-    `;
-    
-    // Colores según el tipo
-    switch(type) {
-        case 'success':
-            notification.style.backgroundColor = '#28a745';
-            break;
-        case 'error':
-            notification.style.backgroundColor = '#dc3545';
-            break;
-        case 'warning':
-            notification.style.backgroundColor = '#ffc107';
-            notification.style.color = '#212529';
-            break;
-        default:
-            notification.style.backgroundColor = '#0099ff';
-    }
-    
-    // Agregar al DOM
-    document.body.appendChild(notification);
-    
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-in';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 3000);
-}
-
-// Agregar estilos CSS para las animaciones
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Función para guardar datos temporalmente en sessionStorage
-function saveTempData() {
+// Función para validar formulario
+function validarFormulario() {
     const inputs = document.querySelectorAll('.percentage-input');
-    const tempData = {};
+    let total = 0;
+    let hayErrores = false;
     
     inputs.forEach(input => {
-        tempData[input.name] = input.value;
+        const valor = parseFloat(input.value) || 0;
+        total += valor;
+        
+        if (valor < 0) {
+            input.style.borderColor = '#dc3545';
+            hayErrores = true;
+        } else {
+            input.style.borderColor = '#dee2e6';
+        }
     });
     
-    sessionStorage.setItem('membresia_temp', JSON.stringify(tempData));
+    if (total > 100) {
+        mostrarNotificacion('El total de porcentajes no puede exceder 100%', 'error');
+        hayErrores = true;
+    }
+    
+    return !hayErrores;
 }
 
-// Función para cargar datos temporales
-function loadTempData() {
-    const tempData = sessionStorage.getItem('membresia_temp');
-    if (tempData) {
-        const data = JSON.parse(tempData);
-        Object.keys(data).forEach(key => {
-            const input = document.querySelector(`input[name="${key}"]`);
-            if (input) {
-                input.value = data[key];
+// Función para mostrar modal de agregar banco
+function mostrarModalAgregar() {
+    bancoEditando = null;
+    document.getElementById('modalTitle').textContent = 'Agregar Nuevo Banco';
+    document.getElementById('bancoId').value = '';
+    document.getElementById('bancoNombre').value = '';
+    document.getElementById('bancoPorcentaje').value = '';
+    document.getElementById('bancoModal').style.display = 'block';
+}
+
+// Función para mostrar modal de editar banco
+function editarBanco(id) {
+    bancoEditando = id;
+    document.getElementById('modalTitle').textContent = 'Editar Banco';
+    
+    // Obtener datos del banco
+    fetch('banco_operations.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=obtener&id=${id}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('bancoId').value = data.data.IdBanco;
+            document.getElementById('bancoNombre').value = data.data.Nombre;
+            document.getElementById('bancoPorcentaje').value = data.data.Porcentaje;
+            document.getElementById('bancoModal').style.display = 'block';
+        } else {
+            mostrarNotificacion(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        mostrarNotificacion('Error al cargar datos del banco', 'error');
+    });
+}
+
+// Función para ver banco (mostrar detalles)
+function verBanco(id) {
+    fetch('banco_operations.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=obtener&id=${id}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const banco = data.data;
+            mostrarNotificacion(`Banco: ${banco.Nombre} - Porcentaje: ${banco.Porcentaje}%`, 'info');
+        } else {
+            mostrarNotificacion(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        mostrarNotificacion('Error al obtener datos del banco', 'error');
+    });
+}
+
+// Función para eliminar banco
+function eliminarBanco(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar este banco?')) {
+        fetch('banco_operations.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=eliminar&id=${id}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarNotificacion(data.message, 'success');
+                // Recargar la página para mostrar los cambios
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                mostrarNotificacion(data.message, 'error');
             }
+        })
+        .catch(error => {
+            mostrarNotificacion('Error al eliminar banco', 'error');
         });
-        updateTotal();
     }
 }
 
-// Cargar datos temporales al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    loadTempData();
+// Función para cerrar modal
+function cerrarModal() {
+    document.getElementById('bancoModal').style.display = 'none';
+    bancoEditando = null;
+}
+
+// Función para guardar banco (agregar o actualizar)
+function guardarBanco(formData) {
+    const action = bancoEditando ? 'actualizar' : 'agregar';
     
-    // Guardar datos al cambiar inputs
+    fetch('banco_operations.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=${action}&${new URLSearchParams(formData).toString()}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            mostrarNotificacion(data.message, 'success');
+            cerrarModal();
+            // Recargar la página para mostrar los cambios
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            mostrarNotificacion(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        mostrarNotificacion('Error al guardar banco', 'error');
+    });
+}
+
+// Event listeners cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener para inputs de porcentaje
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('percentage-input')) {
+            actualizarTotal();
+        }
+    });
+    
+    // Event listener para el formulario de banco
+    const bancoForm = document.getElementById('bancoForm');
+    if (bancoForm) {
+        bancoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            guardarBanco(formData);
+        });
+    }
+    
+    // Event listener para cerrar modal con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            cerrarModal();
+        }
+    });
+    
+    // Event listener para cerrar modal haciendo clic fuera
+    document.getElementById('bancoModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            cerrarModal();
+        }
+    });
+    
+    // Event listener para el formulario principal
+    const membershipForm = document.getElementById('membershipForm');
+    if (membershipForm) {
+        membershipForm.addEventListener('submit', function(e) {
+            if (!validarFormulario()) {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Mostrar mensaje de guardando
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+            submitBtn.disabled = true;
+            
+            // Simular envío (en un caso real, esto se manejaría con AJAX)
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                mostrarNotificacion('Cambios guardados exitosamente', 'success');
+            }, 2000);
+        });
+    }
+    
+    // Inicializar total
+    actualizarTotal();
+    
+    // Guardar datos temporales en sessionStorage
     const inputs = document.querySelectorAll('.percentage-input');
     inputs.forEach(input => {
-        input.addEventListener('input', saveTempData);
+        const savedValue = sessionStorage.getItem(`banco_${input.dataset.id}`);
+        if (savedValue) {
+            input.value = savedValue;
+            actualizarTotal();
+        }
+        
+        input.addEventListener('input', function() {
+            sessionStorage.setItem(`banco_${this.dataset.id}`, this.value);
+        });
     });
 });
+
+// Función para limpiar datos temporales
+function limpiarDatosTemporales() {
+    const inputs = document.querySelectorAll('.percentage-input');
+    inputs.forEach(input => {
+        sessionStorage.removeItem(`banco_${input.dataset.id}`);
+    });
+}
+
+// Función para cargar datos desde sessionStorage
+function cargarDatosTemporales() {
+    const inputs = document.querySelectorAll('.percentage-input');
+    inputs.forEach(input => {
+        const savedValue = sessionStorage.getItem(`banco_${input.dataset.id}`);
+        if (savedValue) {
+            input.value = savedValue;
+        }
+    });
+    actualizarTotal();
+}

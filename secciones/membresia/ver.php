@@ -1,25 +1,10 @@
 <?php
 include_once '../../db.php';
+include_once 'banco_operations.php';
 
-// Obtener datos de membresía desde la base de datos
-$query = "SELECT * FROM membresia_bancos ORDER BY id";
-$result = mysqli_query($conectador, $query);
-
-$bancos = [];
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $bancos[] = $row;
-    }
-}
-
-// Si no hay datos, usar valores por defecto
-if (empty($bancos)) {
-    $bancos = [
-        ['nombre' => 'Banco Unión', 'porcentaje' => 50],
-        ['nombre' => 'Banco Ganadero', 'porcentaje' => 27],
-        ['nombre' => 'Banco Mercantil', 'porcentaje' => 16]
-    ];
-}
+// Obtener bancos desde la base de datos
+$bancos = obtenerBancos();
+$total_porcentajes = obtenerTotalPorcentajes();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,60 +16,100 @@ if (empty($bancos)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - Posicionado como en la imagen -->
     <header class="header">
-        <div class="nav-container">
-            <div>
-                <span style="font-size: 1.2rem; font-weight: 600; color: #495057;">Membresía</span>
-            </div>
-            <a href="../../index.php" class="back-button">
-                <i class="fas fa-arrow-left"></i>
-                Back
-            </a>
+        <div>
+            <span style="font-size: 1.2rem; font-weight: 600; color: #333;">Membresía</span>
         </div>
+        <a href="../../index.php" class="back">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </a>
     </header>
 
     <!-- Contenido principal -->
-    <div class="main-container">
-        <!-- Logo y título -->
+    <div class="container">
+        <!-- Logo y título - Centrados como en la imagen -->
         <div class="logo-section">
             <div class="logo">
                 <i class="fas fa-car"></i>
             </div>
             <h1 class="app-title">CAR PARKING</h1>
-            <h2 class="section-title">Membresía</h2>
+            <h2 class="section-title">Ver Membresía</h2>
         </div>
 
-        <!-- Navegación -->
-        <?php include 'nav.php'; ?>
-        
-        <!-- Vista de membresía -->
-        <div class="content-card">
-            <div class="bank-list">
+        <!-- Lista de bancos en modo solo lectura -->
+        <div class="bank-list">
+            <?php if ($bancos && count($bancos) > 0): ?>
                 <?php foreach ($bancos as $banco): ?>
-                <div class="bank-item">
-                    <div class="bank-name"><?php echo htmlspecialchars($banco['nombre']); ?></div>
-                    <div class="percentage-display"><?php echo htmlspecialchars($banco['porcentaje']); ?>%</div>
-                    <?php if ($banco['nombre'] === 'Banco Unión'): ?>
-                    <div class="action-buttons">
-                        <a href="index.php" class="btn btn-edit-large">
-                            <i class=""></i>
-                            Editar
-                        </a>
+                    <div class="bank-item">
+                        <div class="bank-name"><?php echo htmlspecialchars($banco['Nombre']); ?></div>
+                        <div class="percentage-display"><?php echo number_format($banco['Porcentaje'], 2); ?>%</div>
+                        <div class="action-buttons">
+                            <button type="button" class="btn-view" onclick="verDetallesBanco(<?php echo $banco['IdBanco']; ?>)" title="Ver Detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
                     </div>
-                    <?php endif; ?>
-                </div>
                 <?php endforeach; ?>
-            </div>
+            <?php else: ?>
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-info-circle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p>No hay bancos registrados en el sistema.</p>
+                </div>
+            <?php endif; ?>
+        </div>
 
-            <!-- Botón volver al menú -->
-            <a href="../../index.php" class="main-button" style="text-decoration: none; display: inline-block;">
+        <!-- Indicador de total -->
+        <div id="total-display">
+            Total: <?php echo number_format($total_porcentajes, 2); ?>%
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="action-buttons" style="justify-content: center; margin-top: 30px;">
+            <a href="index.php" class="main-button" style="max-width: 200px; text-decoration: none; display: inline-block;">
+                <i class="fas fa-pencil-alt"></i>
+                Editar
+            </a>
+            <a href="../../index.php" class="main-button" style="max-width: 200px; text-decoration: none; display: inline-block; margin-left: 20px; background: #6c757d;">
                 <i class="fas fa-home"></i>
-                Volver al menú
+                Menú Principal
             </a>
         </div>
     </div>
 
     <script src="js/script.js"></script>
+    <script>
+        // Función para ver detalles del banco
+        function verDetallesBanco(id) {
+            fetch('banco_operations.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=obtener&id=${id}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const banco = data.data;
+                    const fechaCreacion = new Date(banco.FechaCreacion).toLocaleDateString('es-ES');
+                    const fechaActualizacion = new Date(banco.FechaActualizacion).toLocaleDateString('es-ES');
+                    
+                    alert(`Detalles del Banco:\n\n` +
+                          `Nombre: ${banco.Nombre}\n` +
+                          `Porcentaje: ${banco.Porcentaje}%\n` +
+                          `Estado: ${banco.Estado}\n` +
+                          `Fecha de Creación: ${fechaCreacion}\n` +
+                          `Última Actualización: ${fechaActualizacion}`);
+                } else {
+                    alert('Error al obtener detalles del banco');
+                }
+            })
+            .catch(error => {
+                alert('Error al obtener detalles del banco');
+            });
+        }
+    </script>
 </body>
 </html>

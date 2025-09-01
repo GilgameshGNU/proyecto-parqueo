@@ -1,6 +1,16 @@
--- Crear nueva base de datos para el proyecto de parqueo
 CREATE DATABASE IF NOT EXISTS Parqueo;
 USE Parqueo;
+
+-- Tabla de Bancos para Membresía
+CREATE TABLE BancoMembresia
+(
+    IdBanco INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Porcentaje DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+    Estado ENUM('Activo','Inactivo') DEFAULT 'Activo',
+    FechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FechaActualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
 -- Tabla de Membresías
 CREATE TABLE Membresia
@@ -121,6 +131,12 @@ INSERT INTO Membresia(Nombre, Descuento, Precio) VALUES
 ('Básica', 5.00, 50.00),
 ('Premium', 15.00, 100.00),
 ('VIP', 25.00, 200.00);
+
+-- Insertar bancos iniciales para membresía
+INSERT INTO BancoMembresia(Nombre, Porcentaje) VALUES
+('Banco Unión', 50.00),
+('Banco Ganadero', 27.00),
+('Banco Mercantil', 16.00);
 
 -- Mostrar mensaje de confirmación
 SELECT 'Base de datos Parqueo creada exitosamente!' as Mensaje;
