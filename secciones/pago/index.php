@@ -87,11 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="value"><?php echo $ticket['Placa']; ?></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Hora de entrada:</span>
+                        <span class="label">Fecha y Hora de entrada:</span>
                         <span class="value"><?php echo date('Y-m-d H:i', strtotime($ticket['FechaHoraEntrada'])); ?></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Hora de salida:</span>
+                        <span class="label">Fecha y Hora de salida:</span>
                         <span class="value"><?php echo date('Y-m-d H:i'); ?></span>
                     </div>
                     <div class="info-item">
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="info-item highlight">
                         <span class="label">Costo Total:</span>
-                        <span class="value">$<?php echo number_format($costo_total, 2); ?></span>
+                        <span class="value">Bs <?php echo number_format($costo_total, 2, ',', '.'); ?></span>
                     </div>
                 </div>
             </div>
@@ -131,17 +131,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-section" id="qr-section" style="display: none;">
                     <h3>Pago con QR</h3>
                     <div class="qr-code">
-                        <img src="../images/qr-payment.png" alt="Código QR para pago">
+                        <img src="./img/qrcode.png" alt="Código QR para pago">
                         <p>Escanea el código QR para realizar el pago</p>
                     </div>
-                    
+                </div>
+
+                <div class="form-section">
+                    <h3>Datos de Facturación</h3>
                     <div class="form-group">
                         <label for="nit">NIT:</label>
-                        <input type="text" id="nit" name="nit" placeholder="Ingrese su NIT" required>
+                        <input type="text" id="nit" name="nit" placeholder="Ingrese su NIT">
                     </div>
                     <div class="form-group">
                         <label for="razon_social">Razón Social:</label>
-                        <input type="text" id="razon_social" name="razon_social" placeholder="Ingrese razón social" required>
+                        <input type="text" id="razon_social" name="razon_social" placeholder="Ingrese razón social">
                     </div>
                 </div>
 

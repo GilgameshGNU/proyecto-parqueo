@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #f5f7f9;
+    background-color: #7ca2ce;
     color: #333;
     line-height: 1.6;
 }
@@ -25,12 +25,12 @@ header {
 }
 
 header h1 {
-    color: #2c3e50;
+    color: #000000;
     margin-bottom: 5px;
 }
 
 header p {
-    color: #7f8c8d;
+    color: #1a1e1f;
     font-size: 1.1rem;
 }
 

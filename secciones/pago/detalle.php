@@ -112,7 +112,7 @@ if (isset($_GET['id_pago'])) {
                         </div>
                         <div class="detail-item highlight">
                             <span class="label">Total Pagado:</span>
-                            <span class="value">$<?php echo number_format($pago['MontoTotal'], 2); ?></span>
+                            <span class="value">Bs <?php echo number_format(    $pago['MontoTotal'], 2, '.', ','); ?></span>
                         </div>
                     </div>
                 </div>

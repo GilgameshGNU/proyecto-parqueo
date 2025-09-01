@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("descuento").value =
         descuento > 0 ? `${descuento}%` : "No aplica";
       document.getElementById("tiempoEstacionado").value = `${horas}h ${minutos}m`;
-      document.getElementById("costoTotal").value = `$${costo.toFixed(2)}`;
+      document.getElementById("costoTotal").value = `Bs ${costo.toFixed(2)}`;
     });
   });
 
@@ -80,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("horaSalida").value = fechaHoraSalida;
 
     const idTicket = seleccionado.dataset.idticket;
-    const costo = document.getElementById("costoTotal").value.replace("$", "");
-    const horaSalida = document.getElementById("horaSalida").value;
 
     // Crear formulario dinámico para enviar por POST
     const form = document.createElement("form");
@@ -94,17 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
     inputId.value = idTicket;
     form.appendChild(inputId);
 
-    const inputCosto = document.createElement("input");
-    inputCosto.type = "hidden";
-    inputCosto.name = "costo";
-    inputCosto.value = costo;
-    form.appendChild(inputCosto);
-
-    const inputHora = document.createElement("input");
-    inputHora.type = "hidden";
-    inputHora.name = "horasalida";
-    inputHora.value = horaSalida;
-    form.appendChild(inputHora);
 
     document.body.appendChild(form);
     form.submit();
