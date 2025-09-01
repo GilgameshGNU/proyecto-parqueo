@@ -1,0 +1,119 @@
+/* Reset sencillo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+    background: #7CA2CE;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 900px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+/* Tabla de tarifas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table thead {
+    background: #0077b6;
+    color: white;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* table tr:hover {
+    background: #f1f1f1;
+} */
+
+.btn-edit {
+    background: #ffb703;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.btn-edit:hover {
+    background: #fb8500;
+    color: white;
+}
+
+/* Formulario */
+.form-container {
+    max-width: 500px;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-save {
+    background: #0077b6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-save:hover {
+    background: #023e8a;
+}
+
+.btn-back {
+    background: #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.btn-back:hover {
+    background: #bdbdbd;
+}
