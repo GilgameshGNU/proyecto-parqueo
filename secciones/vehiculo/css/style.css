@@ -1,0 +1,88 @@
+body {
+      margin: 0;
+      padding: 0;
+      background-color: #7CA2CE;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      height: 70px;
+      width: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 10px 0 20px;
+      font-size: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: block;
+      width: 102%;
+      background-color: #0099ff;
+      color: white;
+      font-size: 16px;
+      padding: 12px;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background-color: #007acc;
+    }
+
+    /* Estilo para mensajes de error */
+    .error-message {
+      color: red;
+      background: #ffebee;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      border: 1px solid #ffcdd2;
+    }

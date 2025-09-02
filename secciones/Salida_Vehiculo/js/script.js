@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("Back").addEventListener("click", () => {
-    window.location.href = `../../../index.php`;
+    window.location.href = `../../index.php`;
   });
 
   // Confirmar salida con POST
