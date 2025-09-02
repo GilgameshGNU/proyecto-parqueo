@@ -3,6 +3,7 @@
 session_start();
 include '../../db.php';
 include '../../templates/header.php';
+
 // --- Filtros (valores por defecto: mes actual)
 $hoy = new DateTime('now');
 $desde_default = $hoy->format('Y-m'); // YYYY-MM

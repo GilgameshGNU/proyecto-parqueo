@@ -28,6 +28,10 @@ if (!isset($_SESSION['usuario'])) {
       <a href="secciones/vehiculario/menu.php" class="btn">Vehículo Dentro</a>
       <a href="secciones/tarifario/tarifas.php" class="btn">Tarifa</a>
       <a href="secciones/membresiario/membresias.php" class="btn">Membresía</a>
+      <?php if ($_SESSION['rol'] === 'Administrador'): ?>
+        <a href="/proyecto-parqueo/secciones/Report/index.php" class="btn">Reportes</a>
+      <?php endif; ?>
+
     </div>
   </div>
 </body>
