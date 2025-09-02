@@ -82,12 +82,9 @@ $total_porcentajes = obtenerTotalPorcentajes();
                 <?php endif; ?>
             </div>
 
-            <!-- Indicador de total -->
-            <div id="total-display">
-                Total: <?php echo number_format($total_porcentajes, 2); ?>%
-            </div>
 
-            <!-- Botón guardar - IDÉNTICO a la imagen -->
+
+            <!-- Botón guardar - -->
             <button type="submit" class="main-button">
                 <i class="fas fa-save"></i>
                 Guardar Cambios

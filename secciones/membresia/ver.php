@@ -16,7 +16,7 @@ $total_porcentajes = obtenerTotalPorcentajes();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header - Posicionado como en la imagen -->
+    <!-- Header -->
     <header class="header">
         <div>
             <span style="font-size: 1.2rem; font-weight: 600; color: #333;">Membresía</span>
@@ -29,13 +29,20 @@ $total_porcentajes = obtenerTotalPorcentajes();
 
     <!-- Contenido principal -->
     <div class="container">
-        <!-- Logo y título - Centrados como en la imagen -->
+        <!-- Logo y título --->
         <div class="logo-section">
             <div class="logo">
                 <i class="fas fa-car"></i>
             </div>
             <h1 class="app-title">CAR PARKING</h1>
             <h2 class="section-title">Ver Membresía</h2>
+        </div>
+        <!-- Botones de acción -->
+        <div class="action-buttons" style="justify-content: center; margin-top: 30px;">
+            <a href="index.php" class="main-butto" style="max-width: 200px; text-decoration: none; display: inline-block; margin-left: 490px;">
+                <i class="fas fa-pencil-alt"></i>
+                Editar
+            </a>
         </div>
 
         <!-- Lista de bancos en modo solo lectura -->
@@ -60,18 +67,11 @@ $total_porcentajes = obtenerTotalPorcentajes();
             <?php endif; ?>
         </div>
 
-        <!-- Indicador de total -->
-        <div id="total-display">
-            Total: <?php echo number_format($total_porcentajes, 2); ?>%
-        </div>
+        
 
         <!-- Botones de acción -->
         <div class="action-buttons" style="justify-content: center; margin-top: 30px;">
-            <a href="index.php" class="main-button" style="max-width: 200px; text-decoration: none; display: inline-block;">
-                <i class="fas fa-pencil-alt"></i>
-                Editar
-            </a>
-            <a href="../../index.php" class="main-button" style="max-width: 200px; text-decoration: none; display: inline-block; margin-left: 20px; background: #6c757d;">
+            <a href="../../index.php" class="main-button" style="max-width: 800px; text-decoration: none; display: inline-block; margin-left: 20px;">
                 <i class="fas fa-home"></i>
                 Menú Principal
             </a>
