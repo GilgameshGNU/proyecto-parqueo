@@ -1,6 +1,10 @@
 <?php
 // pages/reportes.php
 session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /proyecto-parqueo/login.php");
+    exit();
+}
 include '../../db.php';
 include '../../templates/header.php';
 

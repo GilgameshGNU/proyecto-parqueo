@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /proyecto-parqueo/login.php");
+    exit();
+}
 include("../../db.php");
 
 $query = "SELECT t.IdTarifa, tv.Nombre AS TipoVehiculo, t.Precio, t.FechaInicio, t.FechaFin

@@ -1,30 +1,39 @@
-body {
+/* Reset sencillo */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #7CA2CE; /* Fondo azul */
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  background: #7CA2CE;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* centra también verticalmente */
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 700px;
-  padding: 20px;
-  margin: 30px auto;
+  max-width: 800px;
   text-align: center;
-}
-
-.back {
-  font-size: 16px;
-  margin-bottom: 10px;
-  display: inline-block;
-  cursor: pointer;
 }
 
 h1 {
   text-align: center;
-  margin: 10px 0 20px;
+  margin-bottom: 20px;
+  color: #0077b6;
   font-size: 24px;
 }
 
+/* Grupos de entrada */
 .input-group {
   margin-bottom: 20px;
   text-align: left;
@@ -32,40 +41,60 @@ h1 {
 
 .input-group label {
   display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
   font-size: 14px;
-  margin-bottom: 5px;
 }
 
-.input-group input {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-}
+.input-group input,
 .input-group select {
   width: 100%;
   padding: 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
 }
 
-
+/* Botón principal */
 .btn {
   display: block;
   width: 100%;
-  background-color: #0099ff;
-  color: white;
-  font-size: 16px;
-  padding: 12px;
-  text-align: center;
+  background: #ffb703;
+  color: black;
   border: none;
-  border-radius: 4px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
 .btn:hover {
-  background-color: #007acc;
+  background: #023e8a;
+}
+
+
+.back:hover {
+  background: #bdbdbd;
+}
+
+/* Centrar el logo arriba */
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Ajustar el tamaño del logo */
+.logo img {
+  width: 150px;
+  height: auto;
+  max-width: 90vw;
 }

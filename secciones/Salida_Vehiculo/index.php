@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /proyecto-parqueo/login.php");
+    exit();
+}
 // Conexión a la base de datos
 include '../../db.php';
 // Consulta para obtener vehículos estacionados (tickets abiertos)

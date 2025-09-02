@@ -12,7 +12,6 @@
     <img src="secciones/vehiculo/img/logo.png" alt="Logo Parqueo" width="120">
   </div>
   <div class="container">
-    <div class="back"><a href="index.php">Back</a></div>
     <h1>Iniciar Sesión</h1>
     <form action="procesar_login.php" method="POST">
       <div class="input-group">

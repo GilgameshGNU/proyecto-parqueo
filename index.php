@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit;
+    header("Location: /proyecto-parqueo/login.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario'])) {
       <?php if ($_SESSION['rol'] === 'Administrador'): ?>
         <a href="/proyecto-parqueo/secciones/Report/index.php" class="btn">Reportes</a>
       <?php endif; ?>
-
+      <a href="cerra.php" class="btn">Cerrar sesión</a>
     </div>
   </div>
 </body>

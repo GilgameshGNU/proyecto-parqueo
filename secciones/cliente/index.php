@@ -1,8 +1,17 @@
 <?php
 session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /proyecto-parqueo/login.php");
+    exit();
+}
+
 // Recuperar datos temporales si existen
 $cliente_temp = $_SESSION['cliente_temp'] ?? [];
+
+// Eliminar datos temporales después de usarlos
+unset($_SESSION['cliente_temp']);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
