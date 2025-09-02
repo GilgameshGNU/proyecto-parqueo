@@ -1,0 +1,228 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #7ca2ce;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+#searchInput {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 300px;
+  font-size: 16px;
+}
+#searchBtn {
+  padding: 10px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#searchBtn:hover {
+  background: #2980b9;
+}
+.vehiculos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+.vehiculo-item {
+  background: #ffffff;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.vehiculo-item:hover {
+  border-color: #3498db;
+  background: #f8f9fa;
+}
+.vehiculo-item.seleccionado {
+  border-color: #3498db;
+  background: #e8f4fd;
+}
+.vehiculo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.vehiculo-placa {
+  font-weight: bold;
+  font-size: 18px;
+  color: #2c3e50;
+}
+.vehiculo-desc {
+  color: #7f8c8d;
+}
+.vehiculo-tipo {
+  background: #ecf0f1;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+.vehiculo-detalles {
+  text-align: right;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+.no-vehiculos {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+.info-salida {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+.info-salida h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  text-align: center;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+.info-row label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.info-row input {
+  padding: 8px;
+  border: none;
+  background: transparent;
+  text-align: right;
+  font-weight: bold;
+  color: #2c3e50;
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  #searchInput {
+    width: 100%;
+    max-width: 300px;
+  }
+  .vehiculo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .vehiculo-detalles {
+    text-align: left;
+    width: 100%;
+  }
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .info-row input {
+    width: 100%;
+    text-align: left;
+  }
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #7ca2ce;
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+
+/* Botón Back */
+#Back {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 15px;
+}
+
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+
+
+/* Botón Siguiente estilo Figma */
+#confirmarBtn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  background: #0094ff;
+  color: white;
+  cursor: pointer;
+}
+
+#confirmarBtn:hover {
+  background: #007bdb;
+}
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #86b0e0; /* un azul más claro que el fondo */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* sombra más fuerte */
+}
+
+.info-salida {
+  margin-top: 30px;
+  padding: 25px;
+  background: #86b0e0; /* mismo tono para uniformidad */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* sombra notoria */
+}

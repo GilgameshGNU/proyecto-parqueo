@@ -28,7 +28,7 @@ $result = mysqli_query($conectador, $sql);
 <body>
     <div class="container">
         <!-- Botón Volver -->
-        <a href="/../../index.php" class="btn-volver">Volver</a>
+        <a href="../../index.php" class="btn-volver">Volver</a>
         <h2>Vehículo dentro</h2>
 
         <input type="text" id="buscador" placeholder="Buscar...">

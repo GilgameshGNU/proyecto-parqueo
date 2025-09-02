@@ -14,6 +14,7 @@ $result = mysqli_query($conectador, $query);
 <body>
 <div class="container">
     <h1>Listado de Membresías</h1>
+    <a href="../../index.php" class="btn-back">Volver</a>
     <a href="nueva_membresia.php" class="btn-save" style="margin-bottom: 15px; display:inline-block;">+ Nueva Membresía</a>
     <table>
         <thead>

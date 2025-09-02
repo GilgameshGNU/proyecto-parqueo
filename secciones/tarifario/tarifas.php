@@ -15,6 +15,7 @@ $result = mysqli_query($conectador, $query);
 </head>
 <body>
     <div class="container">
+        <a href="../../index.php" class="btn-back">Volver</a>
         <h1>Listado de Tarifas</h1>
         <table>
             <thead>

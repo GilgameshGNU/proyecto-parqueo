@@ -25,9 +25,9 @@ if (!isset($_SESSION['usuario'])) {
     <div class="menu">
       <a href="secciones/cliente/index.php" class="btn">Ingreso de vehículo</a>
       <a href="secciones/Salida_Vehiculo/index.php" class="btn">Salida de vehículo</a>
-      <a href="secciones//index.php" class="btn">Vehículo Dentro</a>
-      <a href="secciones//index.php" class="btn">Tarifa</a>
-      <a href="secciones//index.php" class="btn">Membresía</a>
+      <a href="secciones/vehiculario/menu.php" class="btn">Vehículo Dentro</a>
+      <a href="secciones/tarifario/tarifas.php" class="btn">Tarifa</a>
+      <a href="secciones/membresiario/membresias.php" class="btn">Membresía</a>
     </div>
   </div>
 </body>
